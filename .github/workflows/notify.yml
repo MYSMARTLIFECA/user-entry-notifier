@@ -1,0 +1,22 @@
+name: Notify on User Entry
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Notify
+        run: |
+          echo "User entered the website" >> notify.txt
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add notify.txt
+          git commit -m "User entered the website"
+          git push
